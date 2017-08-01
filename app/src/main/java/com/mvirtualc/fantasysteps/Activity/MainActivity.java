@@ -34,10 +34,12 @@ public class MainActivity extends Activity {
                     return;
                 }
                 uuid = UUID.randomUUID().toString();
-                final SendAuth.Req req =  new SendAuth.Req();
+                final SendAuth.Req req = new SendAuth.Req();
                 req.scope = "snsapi_userinfo";
                 req.state = uuid;
-                MyApplication.api.sendReq(req);
+                System.out.println("state: " + uuid);
+                boolean b = api.sendReq(req);
+                System.out.println(b);
             }
         });
     }
