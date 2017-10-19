@@ -1,4 +1,4 @@
-package com.mvirtualc.fantasysteps.activity;
+package com.mvirtualc.fantasysteps.Activity;
 
 import android.Manifest;
 import android.app.Activity;

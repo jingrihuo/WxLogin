@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.mvirtualc.fantasysteps.MyApplication;
 import com.mvirtualc.fantasysteps.R;
-import com.mvirtualc.fantasysteps.activity.MainActivity;
+import com.mvirtualc.fantasysteps.Activity.MainActivity;
 import com.mvirtualc.fantasysteps.http.HttpTest;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
