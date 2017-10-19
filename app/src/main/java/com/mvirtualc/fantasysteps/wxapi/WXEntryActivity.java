@@ -10,6 +10,9 @@ import com.mvirtualc.fantasysteps.http.HttpTest;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -36,7 +39,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp){
-        System.out.println("onResp");
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
                 System.out.println("成功");
@@ -48,6 +50,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                     return;// 判断请求是否是我的应用的请求
                 try {
                     httpTest.sendCode(response.code);
+                    wxSendMegs();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -62,4 +65,17 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 break;
         }
     }
+    public void wxSendMegs(){
+        WXTextObject textObject = new WXTextObject();
+        textObject.text = "APP分享测试";
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.description = "APP分享测试";
+        msg.mediaObject = textObject;
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());
+        req.message = msg;
+        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        api.sendReq(req);
+    }
+
 }
